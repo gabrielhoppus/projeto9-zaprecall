@@ -32,3 +32,5 @@ const CARDS = [
         answer: "Dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"
     },
 ]
+
+export default CARDS
