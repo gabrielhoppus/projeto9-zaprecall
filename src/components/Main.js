@@ -2,18 +2,22 @@ import Cards from "./Cards"
 import Footer from "./Footer"
 import Logo from "./Logo"
 import styled from "styled-components"
+import { useState } from "react"
 
-function Main() {
+
+
+export default function Main() {
+    const [contador, setContador] = useState(0)
+
     return (
         <ScreenContainer>
             <Logo />
-            <Cards />
-            <Footer />
+            <Cards setContador={setContador} contador={contador}/>
+            <Footer contador={contador}/>
         </ScreenContainer>
     )
 }
 
-export default Main
 
 const ScreenContainer = styled.div`
     background-color: #FB6B6B;

@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
-function Footer() {
+function Footer({ contador }) {
     return (
-        <FooterConcluido>
-            0/4 Concluídos
+        <FooterConcluido data-test="footer">
+            {contador}/4 Concluídos
         </FooterConcluido>
     )
 }
