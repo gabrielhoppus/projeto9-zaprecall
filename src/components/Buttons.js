@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Error from "../assets/icone_erro.png";
+import Miss from "../assets/icone_erro.png";
 import Almost from "../assets/icone_quase.png";
 import Correct from "../assets/icone_certo.png";
 
@@ -14,20 +14,19 @@ function Buttons({  setHasIcon,
                     counter,
                     setFinished,
                     setDataTest
-                }) 
-            {
+                    }){
 
     function pickError(){
         setAnswered(true);
         setButton(false);
         setHasIcon(false);
         setState(`Pergunta ${index+1}`);
-        setIcon(Error);
+        setIcon(Miss);
         setColor("#FF3030");
         setCounter(counter+1);
         setFinished(true);
         setDataTest("no-icon");
-    };
+        }
 
     function pickAlmost(){
         setAnswered(true);
@@ -39,7 +38,7 @@ function Buttons({  setHasIcon,
         setCounter(counter+1);
         setFinished(true);
         setDataTest("partial-icon");
-    };
+        }
 
     function pickCorrect(){
         setAnswered(true);
@@ -51,7 +50,7 @@ function Buttons({  setHasIcon,
         setCounter(counter+1);
         setFinished(true);
         setDataTest("zap-icon");
-    };
+        }
 
     return (
         <ButtonContainer>
@@ -71,7 +70,7 @@ const ButtonContainer = styled.div`
     justify-content: space-between;
     margin-left: 20px;
     column-gap: 10px;
-`
+`;
 
 const AnswerButton = styled.button`
     background-color: ${props => props.color};
@@ -89,4 +88,4 @@ const AnswerButton = styled.button`
     border-radius: 5px;
     border: 1px solid transparent;
     padding:5px;
-`
+`;

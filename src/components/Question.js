@@ -31,7 +31,7 @@ function Question({index, card, setCounter, counter}){
             setButton(true);
             setOpen(false);
         };
-    };
+    }
 
     return (
         <div data-test="flashcard">
@@ -76,7 +76,7 @@ function Question({index, card, setCounter, counter}){
                 </ClosedQuestion>
             )}
         </div>
-    );
+    )
 }
 
 export default Question
@@ -102,7 +102,7 @@ const ClosedQuestion = styled.div`
         color: ${props => props.color};
         text-decoration: ${props => props.finished ? "line-through" : "none"}
     }
-`
+`;
 
 const OpenQuestion = styled.div`
     width: 300px;
@@ -127,4 +127,4 @@ const OpenQuestion = styled.div`
         bottom: 10px;
         right: 10px;
     }
-`
+`;

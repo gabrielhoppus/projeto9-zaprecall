@@ -6,11 +6,12 @@ import Question from "./Question";
 export default function Cards({setCounter, counter}) {
     const [cards] = useState([...CARDS.sort( () => .5 - Math.random() )]);
 
-    return (        
+    return (
         <>
         {cards.slice(0,4)
             .map((card, index) =>
                 <Question
+                key={index+1}
                 counter={counter}
                 setCounter={setCounter}
                 index={index}

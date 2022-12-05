@@ -2,8 +2,10 @@ import styled from "styled-components"
 
 function Footer({counter}) {
     return (
-        <FooterInfo data-test="footer">
-            {counter}/4 Concluídos
+        <FooterInfo>
+            <div data-test="footer">
+                {counter}/4 Concluídos
+            </div>
         </FooterInfo>
     )
 }
