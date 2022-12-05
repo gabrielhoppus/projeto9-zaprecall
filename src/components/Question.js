@@ -1,100 +1,88 @@
-import Play from "../assets/seta_play.png"
-import Turn from "../assets/seta_virar.png"
-import Erro from "../assets/icone_erro.png"
-import Quase from "../assets/icone_quase.png"
-import Certo from "../assets/icone_certo.png"
-import { useState } from "react"
-import Botoes from "./Botoes"
-import styled from "styled-components"
+import Play from "../assets/seta_play.png";
+import Turn from "../assets/seta_virar.png";
+import { useState } from "react";
+import Buttons from "./Buttons";
+import styled from "styled-components";
 
-function Question({ index, perguntaSelecionada, setPergunta, setPerguntaSelecionado, card, pergunta, setContador, contador }) {
-    const [icon, setIcon] = useState(Play)
-    const [fase, setFase] = useState(`Pergunta ${index + 1}`)
-    const [temIcone, setIcone] = useState(true)
-    const [estaAberto, setAberto] = useState(false)
-    const [color, setColor] = useState("")
-    const [foiRespondida, setRespondida] = useState(false)
-    const [temBotao, setBotao] = useState(false)
-    const [finished, setFinished] = useState(false)
-    const [dataTest, setDataTest] = useState("")
+function Question({index, card, setCounter, counter}){
+    const [icon, setIcon] = useState(Play);
+    const [state, setState] = useState(`Pergunta ${index + 1}`);
+    const [hasIcon, setHasIcon] = useState(true);
+    const [isOpen, setOpen] = useState(false);
+    const [color, setColor] = useState("");
+    const [wasAnswered, setAnswered] = useState(false);
+    const [hasButton, setButton] = useState(false);
+    const [finished, setFinished] = useState(false);
+    const [dataTest, setDataTest] = useState("");
+    const [selectedQuestion, setSelected] = useState([]);
 
     function abrirPergunta(card) {
 
         if (icon === Play) {
-            const perguntas = [...perguntaSelecionada, card]
-            setPergunta("pergunta-aberta")
-            setPerguntaSelecionado(perguntas)
-            setIcon(Turn)
-            setIcone(false)
-            setAberto(true)
-            setFase(card.question)
-        } else if (icon === Turn) {
-            setFase(card.answer)
-            setIcone(false)
-            setBotao(true)
-            setAberto(false)
-        }
-    }
+            const perguntas = [...selectedQuestion, card];
+            setSelected(perguntas);
+            setIcon(Turn);
+            setHasIcon(false);
+            setOpen(true);
+            setState(card.question);
+        }else if (icon === Turn){
+            setState(card.answer);
+            setHasIcon(false);
+            setButton(true);
+            setOpen(false);
+        };
+    };
 
     return (
         <div data-test="flashcard">
-            {temIcone && (
-                <PerguntaFechada>
-                    <p data-test="flashcard-text">{fase}</p>
+            {hasIcon && (
+                <ClosedQuestion>
+                    <p data-test="flashcard-text">{state}</p>
                     <img data-test="play-btn" onClick={() => abrirPergunta(card)}
                         alt="play_symbol"
                         src={icon} />
-                </PerguntaFechada>
+                </ClosedQuestion>
             )}
-            {estaAberto && (
-                <PerguntaAberta>
-                    <p data-test="flashcard-text">{fase}</p>
+            {isOpen && (
+                <OpenQuestion>
+                    <p data-test="flashcard-text">{state}</p>
                     <img data-test="turn-btn" onClick={() => abrirPergunta(card)}
                         alt="play_symbol"
                         src={icon} />
-                </PerguntaAberta>
+                </OpenQuestion>
             )}
-            {temBotao && (
-                <PerguntaAberta>
-                    <p data-test="flashcard-text">{fase}</p>
-                    <Botoes
-                        contador={contador}
-                        setContador={setContador}
-                        setPergunta={setPergunta}
-                        setIcone={setIcone}
-                        setFase={setFase}
+            {hasButton && (
+                <OpenQuestion>
+                    <p data-test="flashcard-text">{state}</p>
+                    <Buttons
+                        setHasIcon={setHasIcon}
+                        setState={setState}
                         index={index}
-                        Erro={Erro}
                         setIcon={setIcon}
-                        Certo={Certo}
-                        Quase={Quase}
                         setColor={setColor}
-                        perguntaSelecionada={perguntaSelecionada}
-                        setPerguntaSelecionado={setPerguntaSelecionado}
-                        card={card}
-                        pergunta={pergunta}
-                        setRespondida={setRespondida}
-                        setBotao={setBotao}
+                        setAnswered={setAnswered}
+                        setButton={setButton}
+                        setCounter={setCounter}
+                        counter={counter}
                         setFinished={setFinished}
                         setDataTest={setDataTest}
                     />
-                </PerguntaAberta>
+                </OpenQuestion>
             )}
-            {foiRespondida && (
-                <PerguntaFechada color={color} finished={finished}>
-                    <p data-test="flashcard-text">{fase}</p>
+            {wasAnswered && (
+                <ClosedQuestion color={color} finished={finished}>
+                    <p data-test="flashcard-text">{state}</p>
                     <img data-test={dataTest} alt="play_symbol" src={icon} />
-                </PerguntaFechada>
+                </ClosedQuestion>
             )}
-
         </div>
-    )
+    );
 }
 
 export default Question
 
 
-const PerguntaFechada = styled.div`
+const ClosedQuestion = styled.div`
     width: 300px;
     height: 35px;
     background-color: #FFFFFF; 
@@ -116,7 +104,7 @@ const PerguntaFechada = styled.div`
     }
 `
 
-const PerguntaAberta = styled.div`
+const OpenQuestion = styled.div`
     width: 300px;
     margin: 12px;
     padding: 15px;

@@ -1,16 +1,16 @@
 import styled from "styled-components"
 
-function Footer({ contador }) {
+function Footer({counter}) {
     return (
-        <FooterConcluido data-test="footer">
-            {contador}/4 Concluídos
-        </FooterConcluido>
+        <FooterInfo data-test="footer">
+            {counter}/4 Concluídos
+        </FooterInfo>
     )
 }
 
 export default Footer
 
-const FooterConcluido = styled.div`
+const FooterInfo = styled.div`
     width: 100%;
     min-height: 50px;
     background-color: #FFFFFF;

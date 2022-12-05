@@ -1,32 +1,22 @@
-import { useState } from "react"
-import CARDS from "../mock.js"
-import Question from "./Question"
+import { useState } from "react";
+import CARDS from "../mock.js";
+import Question from "./Question";
 
 
-export default function Cards({setContador, contador}) {
-    const [cards] = useState([...CARDS.sort( () => .5 - Math.random() )])
-    const [pergunta, setPergunta] = useState("pergunta-fechada")
-    const [perguntaSelecionada, setPerguntaSelecionado] = useState([])
+export default function Cards({setCounter, counter}) {
+    const [cards] = useState([...CARDS.sort( () => .5 - Math.random() )]);
 
-
-    return (
-        
+    return (        
         <>
         {cards.slice(0,4)
-            .map((card, index) =>                
+            .map((card, index) =>
                 <Question
-                contador={contador}
-                setContador={setContador}
-                setPergunta={setPergunta}
-                setPerguntaSelecionado={setPerguntaSelecionado}
+                counter={counter}
+                setCounter={setCounter}
                 index={index}
-                perguntaSelecionada={perguntaSelecionada}
                 card={card}
-                pergunta={pergunta}
-                
                 />
-
         )}
         </>
-    )
+    );
 }

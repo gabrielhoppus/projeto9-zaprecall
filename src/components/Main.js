@@ -1,21 +1,19 @@
-import Cards from "./Cards"
-import Footer from "./Footer"
-import Logo from "./Logo"
-import styled from "styled-components"
-import { useState } from "react"
-
-
+import Cards from "./Cards";
+import Footer from "./Footer";
+import Logo from "./Logo";
+import styled from "styled-components";
+import { useState } from "react";
 
 export default function Main() {
-    const [contador, setContador] = useState(0)
+    const [counter, setCounter] = useState(0);
 
     return (
         <ScreenContainer>
             <Logo />
-            <Cards setContador={setContador} contador={contador}/>
-            <Footer contador={contador}/>
+            <Cards setCounter={setCounter} counter={counter}/>
+            <Footer counter={counter}/>
         </ScreenContainer>
-    )
+    );
 }
 
 
